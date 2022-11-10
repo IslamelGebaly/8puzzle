@@ -99,12 +99,28 @@ public class Solver {
                 break;
             }
 
-            for (Board neigbhor : nM.neighbors()) {
-                main.insert(new SNode(neigbhor, nM, nM.getDistance() + 1));
+            SNode previous;
+            for (Board neighbor : nM.neighbors()) {
+                previous = nM.getPrevious();
+                if ((previous == null)) {
+                    main.insert(new SNode(neighbor, nM, nM.getDistance() + 1));
+                }
+                else {
+                    
+                    if (!neighbor.equals(previous.value))
+                        main.insert(new SNode(neighbor, nM, nM.getDistance() + 1));
+                }
             }
 
             for (Board neigbhor : nT.neighbors()) {
-                twin.insert(new SNode(neigbhor, nT, nT.getDistance() + 1));
+                previous = nT.getPrevious();
+                if ((previous == null)) {
+                    twin.insert(new SNode(neigbhor, nT, nT.getDistance() + 1));
+                }
+                else {
+                    if (!neigbhor.equals(previous.value))
+                        twin.insert(new SNode(neigbhor, nT, nT.getDistance() + 1));
+                }
             }
         }
     }
