@@ -64,8 +64,6 @@ public class Solver {
 
     }
 
-    private static MinPQ<SNode> main;
-    private static MinPQ<SNode> twin;
     private boolean isSolvable;
     private Stack<Board> solution;
     private int moves;
@@ -78,9 +76,9 @@ public class Solver {
         isSolvable = false;
         solution = null;
         moves = -1;
-
-        main = new MinPQ<SNode>(SNode::compareTo);
-        twin = new MinPQ<SNode>(SNode::compareTo);
+        
+        MinPQ<SNode> main = new MinPQ<SNode>(SNode::compareTo);
+        MinPQ<SNode> twin = new MinPQ<SNode>(SNode::compareTo);
 
         main.insert(new SNode(initial));
         twin.insert(new SNode(initial.twin()));
