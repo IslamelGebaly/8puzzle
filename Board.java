@@ -41,13 +41,15 @@ public class Board {
 
     // string representation of this board
     public String toString() {
+        StringBuilder sb = new StringBuilder();
+
         String s = ndim + "\n";
         for (int i = 0; i < ndim; i++) {
             for (int j = 0; j < ndim; j++)
-                s += (board1D[transform2Dto1D(i, j)] + " ");
-            s += "\n";
+                sb.append(board1D[transform2Dto1D(i, j)] + " ");
+            sb.append("\n");
         }
-        return s;
+        return sb.toString();
     }
 
     // board dimension n
@@ -92,7 +94,7 @@ public class Board {
         for (int i = 0; i < ndim * ndim - 1; i++) {
             if (board1D[i] != i) return false;
         }
-        
+
         return true;
     }
 

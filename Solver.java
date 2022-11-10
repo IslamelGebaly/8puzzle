@@ -22,6 +22,7 @@ public class Solver {
             this.value = value;
             this.previous = null;
             this.distance = 0;
+            this.manhattan = value.manhattan();
         }
 
 
@@ -44,10 +45,6 @@ public class Solver {
 
         public int getManhattan() {
             return this.manhattan;
-        }
-
-        public Boolean isGoal() {
-            return value.isGoal();
         }
 
         public Iterable<Board> neighbors() {
@@ -95,9 +92,9 @@ public class Solver {
             nM = main.delMin();
             nT = twin.delMin();
 
-            if (nT.isGoal()) break;
+            if (nT.value.isGoal()) break;
 
-            if (nM.isGoal()) {
+            if (nM.value.isGoal()) {
                 isSolvable = true;
                 moves = nM.getDistance();
                 solution = nM.getPath();
