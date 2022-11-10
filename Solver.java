@@ -6,6 +6,7 @@ import edu.princeton.cs.algs4.StdOut;
 public class Solver {
 
     private class SNode implements Comparable<SNode> {
+	int two;
         Board value;
         SNode previous;
         int distance;

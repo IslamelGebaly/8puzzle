@@ -5,6 +5,7 @@ public class Board {
 
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
+    private int one;
     private int[] board1D;
     private int[][] board2D;
     private int ndim;
