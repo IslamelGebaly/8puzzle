@@ -45,8 +45,10 @@ public class Board {
 
         String s = ndim + "\n";
         for (int i = 0; i < ndim; i++) {
-            for (int j = 0; j < ndim; j++)
-                sb.append(board1D[transform2Dto1D(i, j)] + " ");
+            for (int j = 0; j < ndim; j++) {
+                sb.append(board1D[transform2Dto1D(i, j)]);
+                sb.append(" ");
+            }
             sb.append("\n");
         }
         return sb.toString();
@@ -92,7 +94,7 @@ public class Board {
     // is this board the goal board?
     public boolean isGoal() {
         for (int i = 0; i < ndim * ndim - 1; i++) {
-            if (board1D[i] != i) return false;
+            if (board1D[i] != i + 1) return false;
         }
 
         return true;

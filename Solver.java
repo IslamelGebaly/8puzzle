@@ -9,22 +9,24 @@ public class Solver {
         Board value;
         SNode previous;
         int distance;
+        int manhattan;
 
         SNode(Board value, SNode previous, int distance) {
             this.value = value;
             this.previous = previous;
             this.distance = distance;
+            manhattan = value.manhattan();
         }
 
         SNode(Board value) {
             this.value = value;
             this.previous = null;
             this.distance = 0;
+            manhattan = value.manhattan();
         }
 
 
         public int compareTo(SNode that) {
-
             if (this.getManhattan() + this.distance > that.getManhattan() + that.distance)
                 return 1;
             if (this.getManhattan() + this.distance < that.getManhattan() + that.distance)
@@ -41,7 +43,7 @@ public class Solver {
         }
 
         public int getManhattan() {
-            return value.manhattan();
+            return this.manhattan;
         }
 
         public Iterable<Board> neighbors() {
