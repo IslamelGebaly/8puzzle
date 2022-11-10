@@ -89,7 +89,11 @@ public class Board {
 
     // is this board the goal board?
     public boolean isGoal() {
-        return manhattan() == 0;
+        for (int i = 0; i < ndim * ndim - 1; i++) {
+            if (board1D[i] != i) return false;
+        }
+        
+        return true;
     }
 
     // does this board equal y?

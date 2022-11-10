@@ -9,11 +9,13 @@ public class Solver {
         Board value;
         SNode previous;
         int distance;
+        int manhattan;
 
         SNode(Board value, SNode previous, int distance) {
             this.value = value;
             this.previous = previous;
             this.distance = distance;
+            this.manhattan = value.manhattan();
         }
 
         SNode(Board value) {
@@ -41,7 +43,7 @@ public class Solver {
         }
 
         public int getManhattan() {
-            return value.manhattan();
+            return this.manhattan;
         }
 
         public Boolean isGoal() {
