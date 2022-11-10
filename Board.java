@@ -43,7 +43,8 @@ public class Board {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        String s = ndim + "\n";
+        sb.append(ndim);
+        sb.append("\n");
         for (int i = 0; i < ndim; i++) {
             for (int j = 0; j < ndim; j++) {
                 sb.append(board1D[transform2Dto1D(i, j)]);
