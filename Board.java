@@ -20,10 +20,9 @@ public class Board {
         board2D = tiles.clone();
         board1D = new int[ndim * ndim];
 
-
-        for (int i = 0; i < tiles.length * tiles.length; i++) {
-            j = i % tiles.length;
-            board1D[i] = tiles[(i - j) / tiles.length][j];
+        for (int i = 0; i < ndim * ndim; i++) {
+            j = i % ndim;
+            board1D[i] = tiles[(i - j) / ndim][j];
             if (board1D[i] == 0) zeroPosition = i;
         }
 
@@ -32,10 +31,10 @@ public class Board {
     // string representation of this board
     public String toString() {
 
-        String s = board2D.length + "\n";
-        for (int i = 0; i < board2D.length; i++) {
-            for (int j = 0; j < board2D.length; j++)
-                s += (board2D[i][j] + " ");
+        String s = ndim + "\n";
+        for (int i = 0; i < ndim; i++) {
+            for (int j = 0; j < ndim; j++)
+                s += (board1D[transform2Dto1D(i, j)] + " ");
             s += "\n";
         }
         return s;
@@ -221,6 +220,7 @@ public class Board {
 
 
     public static void main(String[] args) {
+        
 
     }
 }
