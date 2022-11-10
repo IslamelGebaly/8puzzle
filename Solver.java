@@ -9,20 +9,17 @@ public class Solver {
         Board value;
         SNode previous;
         int distance;
-        int manhattan;
 
         SNode(Board value, SNode previous, int distance) {
             this.value = value;
             this.previous = previous;
             this.distance = distance;
-            this.manhattan = value.manhattan();
         }
 
         SNode(Board value) {
             this.value = value;
             this.previous = null;
             this.distance = 0;
-            this.manhattan = value.manhattan();
         }
 
 
@@ -44,7 +41,7 @@ public class Solver {
         }
 
         public int getManhattan() {
-            return this.manhattan;
+            return value.manhattan();
         }
 
         public Iterable<Board> neighbors() {
@@ -76,7 +73,7 @@ public class Solver {
         isSolvable = false;
         solution = null;
         moves = -1;
-        
+
         MinPQ<SNode> main = new MinPQ<SNode>(SNode::compareTo);
         MinPQ<SNode> twin = new MinPQ<SNode>(SNode::compareTo);
 
