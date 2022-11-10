@@ -6,7 +6,6 @@ public class Board {
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
     private int[] board1D;
-    private int[][] board2D;
     private int ndim;
     private int zeroPosition;
 
@@ -17,7 +16,6 @@ public class Board {
 
         int j;
         ndim = tiles.length;
-        board2D = tiles.clone();
         board1D = new int[ndim * ndim];
 
         for (int i = 0; i < ndim * ndim; i++) {
@@ -28,9 +26,21 @@ public class Board {
 
     }
 
+    private Board(int[] tiles) {
+        if (tiles == null)
+            throw new IllegalArgumentException();
+
+        ndim = (int) Math.sqrt(tiles.length);
+        board1D = new int[tiles.length];
+        for (int i = 0; i < tiles.length; i++) {
+            if (tiles[i] == 0)
+                zeroPosition = i;
+            board1D[i] = tiles[i];
+        }
+    }
+
     // string representation of this board
     public String toString() {
-
         String s = ndim + "\n";
         for (int i = 0; i < ndim; i++) {
             for (int j = 0; j < ndim; j++)
@@ -72,6 +82,7 @@ public class Board {
             manhattanDistance += (Math.abs(goalCoordinates[0] - currCoordinates[0])
                     + Math.abs(goalCoordinates[1] - currCoordinates[1]));
         }
+
         return manhattanDistance;
 
     }
@@ -110,25 +121,25 @@ public class Board {
 
         if (!checkCollision(row - 1, column)) {
             exch(neighbor, zeroPosition, transform2Dto1D(row - 1, column));
-            neighbors.add(new Board(transformArrayto2D(neighbor)));
+            neighbors.add(new Board(neighbor));
             exch(neighbor, zeroPosition, transform2Dto1D(row - 1, column));
         }
 
         if (!checkCollision(row + 1, column)) {
             exch(neighbor, zeroPosition, transform2Dto1D(row + 1, column));
-            neighbors.add(new Board(transformArrayto2D(neighbor)));
+            neighbors.add(new Board(neighbor));
             exch(neighbor, zeroPosition, transform2Dto1D(row + 1, column));
         }
 
         if (!checkCollision(row, column - 1)) {
             exch(neighbor, zeroPosition, transform2Dto1D(row, column - 1));
-            neighbors.add(new Board(transformArrayto2D(neighbor)));
+            neighbors.add(new Board(neighbor));
             exch(neighbor, zeroPosition, transform2Dto1D(row, column - 1));
         }
 
         if (!checkCollision(row, column + 1)) {
             exch(neighbor, zeroPosition, transform2Dto1D(row, column + 1));
-            neighbors.add(new Board(transformArrayto2D(neighbor)));
+            neighbors.add(new Board(neighbor));
             exch(neighbor, zeroPosition, transform2Dto1D(row, column + 1));
         }
 
@@ -180,7 +191,7 @@ public class Board {
             }
         }
 
-        return new Board(transformArrayto2D(twin));
+        return new Board(twin);
     }
 
     private void exch(int[] board, int a, int b) {
@@ -191,17 +202,6 @@ public class Board {
 
     private int transform2Dto1D(int row, int column) {
         return row * ndim + column;
-    }
-
-    private int[][] transformArrayto2D(int[] arr) {
-        int row, column;
-        int[][] arr2D = new int[ndim][ndim];
-        for (int i = 0; i < ndim * ndim; i++) {
-            column = i % ndim;
-            row = (i - column) / ndim;
-            arr2D[row][column] = arr[i];
-        }
-        return arr2D;
     }
 
     private int[] transform1Dto2D(int index) {
@@ -220,7 +220,7 @@ public class Board {
 
 
     public static void main(String[] args) {
-        
+
 
     }
 }
